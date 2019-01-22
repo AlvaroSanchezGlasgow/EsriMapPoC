@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Esri PoC</title>
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ 
+  
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
+
+  <script src="https://js.arcgis.com/4.10/"></script>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/PopupTemplate",
+      "esri/views/MapView",
+      "esri/Graphic",
+      "esri/geometry/Point"
+    ], function(
+      Map, PopupTemplate, MapView,
+      Graphic, Point
+    ) {
+
+      const map = new Map({
+        basemap: "streets"
+      });
+
+      const view = new MapView({
+         center: [-3.45763, 54.80915],
+        container: "viewDiv",
+        map: map,
+        zoom: 6
+      });
+
+      /*************************
+       * Create point graphics
+       *************************/
+
+       // First create a point geometry
+      const point1 = new Point({
+        longitude:  -4.25763,
+        latitude: 55.86515
+      });
+
+      // Then create another point geometry
+      const point2 = new Point({
+        longitude: -3.19648,
+        latitude: 55.95206
+      });
+
+      // Then create another point geometry
+      const point3 = new Point({
+        longitude: -2.97489,
+        latitude: 56.46913
+      });
+
+      // Then create another point geometry
+      const point4 = new Point({
+        longitude: -3.45887,
+        latitude: 56.07156
+      });
+
+      // Then create a final point geometry
+      const point5 = new Point({
+        longitude: -4.41545,
+        latitude: 55.92437
+      });
+	  
+	   // Then create a final point geometry
+      const point6 = new Point({
+        longitude: -3.0201,
+        latitude: 53.2083
+      });
+      
+	  // Then create a final point geometry
+      const point7 = new Point({
+        longitude: -3.605120,
+        latitude: 55.070858
+      });
+
+      // Create a symbol for drawing the point
+      const textSymbol = {
+	  type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
+      url: "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Ball-Pink-icon.png",
+      width: "30px",
+      height: "30px"
+       /* type: "text", 
+        color: "#427314",
+        text: "\ue61d", 
+        font: { 
+          size: 36,
+          family: "calcite-web-icons"
+        }*/
+      };
+	  
+	   const secondSymbol = {
+       type: "simple-marker",
+		style:'circle',
+		color: 'green',
+		size:20,
+		outline:{color:'rgba(255,255,255,0.5)',width:4}
+		  }
+		  
+		   const symbool = {
+       type: "simple-marker",
+		style:'circle',
+		color: 'red',
+		size:20,
+		outline:{color:'rgba(255,255,255,0.5)',width:4}
+		  }
+	  
+	 /* const symbool = {
+      type: "text", 
+        color: "#427314",
+        text: "\ue61d", 
+        font: { 
+          size: 36,
+          family: "calcite-web-icons"
+		  }
+    };*/
+
+      // Create a graphic and add the geometry and symbol to it
+      const pointGraphic1 = new Graphic({
+        geometry: point1,
+        symbol: secondSymbol,
+      popupTemplate: {
+        title: "INC-0001",
+        content: "Fault already restored"
+      }
+      });
+
+      // Create another graphic and add the geometry and symbol to it
+      const pointGraphic2 = new Graphic({
+        geometry: point2,
+        symbol: symbool,
+      popupTemplate: {
+        title: "INC-0002",
+        content: "Fault!! The following postcodes are affected for this powercut"
+      }
+      });
+
+      // Create another graphic and add the geometry and symbol to it
+      const pointGraphic3 = new Graphic({
+        geometry: point3,
+        symbol: symbool,
+      popupTemplate: {
+        title: "INC-0003",
+       content: "Fault!! The following postcodes are affected for this powercut"
+      }
+      });
+
+      // Create another graphic and add the geometry and symbol to it
+      const pointGraphic4 = new Graphic({
+        geometry: point4,
+        symbol: symbool,
+      popupTemplate: {
+        title: "INC-0004",
+       content: "Fault!! The following postcodes are affected for this powercut"
+      }
+      });
+
+      // Create one last graphic and add the geometry and symbol to it
+      const pointGraphic5 = new Graphic({
+        geometry: point5,
+        symbol: symbool,
+      popupTemplate: {
+        title: "INC-0005",
+        content: "Fault!! The following postcodes are affected for this powercut"
+      }
+      });
+	  
+	   // Create one last graphic and add the geometry and symbol to it
+      const pointGraphic6 = new Graphic({
+        geometry: point6,
+        symbol: symbool,
+      popupTemplate: {
+        title: "INC-0006",
+        content: "Fault!! The following postcodes are affected for this powercut"
+      }
+      });
+	  
+	  // Create one last graphic and add the geometry and symbol to it
+      const pointGraphic7 = new Graphic({
+        geometry: point7,
+        symbol: secondSymbol,
+      popupTemplate: {
+        title: "INC-0007",
+        content: "Fault already restored"
+      }
+      });
+	  
+	  
+	  
+	  
+
+	  /*************************************************************
+       * The PopupTemplate content is the text that appears inside the
+       * popup. {fieldName} can be used to reference the value of an
+       * attribute of the selected feature. HTML elements can be used
+       * to provide structure and styles within the content. The
+       * fieldInfos property is an array of objects (each object representing
+       * a field) that is use to format number fields and customize field
+       * aliases in the popup and legend.
+       **************************************************************/
+
+      var template = { // autocasts as new PopupTemplate()
+        title: "Testing PopUp",
+        content: [{
+          // It is also possible to set the fieldInfos outside of the content
+          // directly in the popupTemplate. If no fieldInfos is specifically set
+          // in the content, it defaults to whatever may be set within the popupTemplate.
+          type: "fields",
+          fieldInfos: [{
+            fieldName: "Test",
+            label: "Testing the pop up in ESRI",
+            visible: true
+          }]
+        }]
+      };
+      // Add the graphics to the view's graphics layer
+      view.graphics.addMany([pointGraphic1, pointGraphic2, pointGraphic3,
+        pointGraphic4, pointGraphic5,pointGraphic6,pointGraphic7
+      ]);
+
+    });
+  </script>
+</head>
+
+<body>
+
+<div class="container-fluid">
+<button onclick="javascript:window.close();" type="button" class="close" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+	<div class="span4">
+			<h1><p class="text-primary">Esri PoC - Powercuts</p></h1>
+			<p>Proof of Concept</p>
+		</div>
+		 </div>
+		 <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:location.reload();">Home</a></li>
+    
+  </ol>
+</nav>
+		<hr></hr>
+		<div class="container-fluid">
+		<button onclick="javascript:location.reload();" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Reload Data">Reload Data</button>
+		</div>
+		<p>
+  <div id="viewDiv" class="border border-primary" style="width:70%;height:60%;margin-left:20%;" data-toggle="tooltip" data-placement="top" title="Outages Map"></div>
+  <hr></hr>
+
+</body>
+</html>
